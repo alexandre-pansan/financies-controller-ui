@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="login-card">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <form [formGroup]="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" formControlName="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" formControlName="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="onLogin()">Login</button>
+                <button type="button" class="btn btn-secondary" (click)="onRegister()">Register</button>
+            </div>
+            <div class="form-group">
+                <a href="#" (click)="onForgotPassword()">Forgot Password?</a>
+            </div>
+            <div class="form-group">
+                @if(errorMessage) {
+                <p class="error-message">{{ errorMessage }}</p>
+                }
+            </div>
+        </form>
+    </div>
+</div>

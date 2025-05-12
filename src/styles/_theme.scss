@@ -1,0 +1,127 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $color-background;
+    color: $color-text;
+    font-family: $font-base;
+}
+
+.container {
+    max-width: 1200px;
+    height: 100vh; // ocupa a altura da viewport
+    margin: 0 auto;
+    padding: $spacing-lg;
+
+    // Usar flexbox para centralizar conteúdo filho
+    display: flex;
+    justify-content: center; // horizontal
+    align-items: center; // vertical
+}
+
+.login-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: $spacing-lg;
+    width: 100%;
+    max-width: 400px;
+
+    .form-group {
+        button {
+            width: 100%;
+
+            &:last-child {
+                margin-top: $spacing-md;
+            }
+        }
+
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    .form-group {
+        margin-bottom: $spacing-md;
+
+        label {
+            font-size: $font-size-sm;
+            font-weight: $font-weight-light;
+            margin-bottom: $spacing-xs;
+        }
+
+        input {
+            padding: $spacing-sm;
+            border: 1px solid $color-secondary;
+            border-radius: 4px;
+            width: 100%;
+        }
+    }
+
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-group.error {
+        input {
+            border-color: $color-danger;
+        }
+    }
+
+    .form-group.success {
+        input {
+            border-color: $color-success;
+        }
+    }
+
+    .form-group.warning {
+        input {
+            border-color: $color-warning;
+        }
+    }
+
+    .form-group.info {
+        input {
+            border-color: $color-info;
+        }
+    }
+
+    .form-group.success-message {
+        color: $color-success;
+        font-size: 0.875rem;
+        margin-top: $spacing-xs;
+    }
+
+    .form-group.error-message {
+        color: $color-danger;
+        font-size: 0.875rem;
+        margin-top: $spacing-xs;
+    }
+
+    .form-group.warning-message {
+        color: $color-warning;
+        font-size: 0.875rem;
+        margin-top: $spacing-xs;
+    }
+
+
+}
+
+button {
+    padding: $spacing-sm $spacing-md;
+    background-color: $color-primary;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+
+    &:hover {
+        background-color: darken($color-primary, 5%);
+    }
+}
