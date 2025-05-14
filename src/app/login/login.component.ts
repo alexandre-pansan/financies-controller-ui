@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
+import { Login } from '../shared/models/login';
+import { Router } from '@angular/router';
+import { AuthLoginResponse } from '../shared/models/auth-login-response';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -13,6 +17,8 @@ import { ApiCallService } from '../services/api-call.service';
 export class LoginComponent {
   errorMessage: string = '';
   fb = inject(FormBuilder);
+  router = inject(Router)
+  http = inject(HttpClient);
   apiCallService = inject(ApiCallService);
   loginForm = this.fb.group({
     username: [''],
@@ -22,14 +28,18 @@ export class LoginComponent {
     //handle register
   }
   onLogin() {
-    //handle login
-    this.apiCallService.postHttpCall('authLogin', this.loginForm.value).subscribe({
+    this.apiCallService.postHttpCall<any>('authLogin', this.loginForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log('next', res)
+        localStorage.setItem('token', res.access_token);
+        this.router.navigate(['/home']);
       }
       , error: (err) => {
-        console.log(err);
-        this.errorMessage = err.error.message;
+        console.log('err', err);
+        this.errorMessage = "Usuario ou senha incorretos";
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
       }
     });
   }

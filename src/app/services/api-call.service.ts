@@ -52,6 +52,7 @@ export class ApiCallService {
         throw new Error(error);
       }),
       map((res: any) => {
+        console.log(res)
         return this.handlesResponses(res, key, errorDetails)
       })
     );
@@ -110,11 +111,13 @@ export class ApiCallService {
   handlesResponses(res: any, key: any, errorDetails: any) {
     // Check if response is null or undefined
     if (!res) {
+
       this.setLogAndDisplayError(key, errorDetails);
       throw new Error('Response is null');
     }
 
     // Return the response if no errors
+    console.log('handle response', res);
     return res;
   }
 
